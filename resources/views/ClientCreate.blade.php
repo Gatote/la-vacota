@@ -2,7 +2,7 @@
 @section('title','Client Create')
 @section('content')
 @include('header') <!-- Incluye el archivo header.php -->
-<form class="form-group" method="POST" action="/Clients"> 
+<form class="form-group" method="POST" action="/Clients" enctype="multipart/form-data">
     @csrf 
     <div clas="form-group">
         <label for="">Nombre:</label>
@@ -25,6 +25,9 @@
         <br>
         <label for="">Comentarios:</label>
         <input type="text" name="debt_comment" class="form-control">
+        <br>
+        <label for="imagen">Seleccionar una foto:</label>
+        <input type="file" name="image" required>
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>

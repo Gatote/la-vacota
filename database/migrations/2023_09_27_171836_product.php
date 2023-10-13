@@ -16,6 +16,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2)->nullable();
             $table->decimal('cost', 10, 2)->nullable();
             $table->decimal('profit', 10, 2)->nullable();
+            $table->string('image');
             $table->timestamps();
         });
     }

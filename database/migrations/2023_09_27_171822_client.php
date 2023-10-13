@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('cellphone', 15)->nullable();
             $table->integer('debt');
             $table->string('comment', 1000)->nullable();
+            $table->string('image');
             $table->timestamps();
         });
     }

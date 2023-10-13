@@ -6,6 +6,7 @@
 
 @foreach ($products as $product)
 <div class="card" style="width: 18rem;">
+  <img src="/images/{{$product->image}}" class="card-img-top img-fluid" alt="{{$product->name}} {{$product->lastname}}" style="max-width: 300px; max-height: 300px;">  
   <div class="card-body">
     <h5 class="card-title">{{$product->id}}: {{$product->name}}</h5>
     <p class="card-text">{{$product->description}}</p>
