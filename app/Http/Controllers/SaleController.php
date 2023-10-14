@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sale;
+use App\Models\Client;
+
 
 class SaleController extends Controller
 {
@@ -15,7 +17,8 @@ class SaleController extends Controller
         return view('IndexSale', compact('sales'));
     }
     public function Create(){
-        return view('SaleCreate');
+        $clientIds = Client::pluck('id');
+        return view('SaleCreate', compact('clientIds'));
     }
     public function store(Request $request)
     {

@@ -25,7 +25,6 @@ class ProductController extends Controller
         $Product -> quantity = $request -> input('quantity');
         $Product -> price = $request -> input('price');
         $Product -> cost = $request -> input('cost');
-        $Product -> profit = $request -> input('profit');
         
 
         

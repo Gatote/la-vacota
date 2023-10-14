@@ -4,12 +4,17 @@
 @include('header') <!-- Incluye el archivo header.php -->
 <form class="form-group" method="POST" action="/Sales"> 
     @csrf 
-    <div clas="form-group">
-        <label for="">Fecha:</label>
+    <div class="form-group">
+        <label for="date">Fecha:</label>
         <input type="date" name="date" class="form-control">
-        <br>
-        <label for="">Id de cliente:</label>
-        <input type="number" name="id_client" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="id_client">Id de cliente:</label>
+        <select name="id_client" class="form-control">
+            @foreach($clientIds as $clientId)
+                <option value="{{ $clientId }}">{{ $clientId }}</option>
+            @endforeach
+        </select>
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>

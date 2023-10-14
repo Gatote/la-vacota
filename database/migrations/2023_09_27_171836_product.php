@@ -19,7 +19,25 @@ return new class extends Migration
             $table->string('image');
             $table->timestamps();
         });
+
+        // Crea una función en PostgreSQL para calcular profit
+        DB::statement('CREATE OR REPLACE FUNCTION calculate_profit() RETURNS TRIGGER AS $$
+        BEGIN
+            NEW.profit = NEW.price - NEW.cost;
+            RETURN NEW;
+        END;
+        $$ LANGUAGE plpgsql');
+
+        // Crea un trigger para llamar a la función cuando se actualizan o insertan registros
+        DB::statement('CREATE TRIGGER calculate_profit_trigger
+            BEFORE INSERT OR UPDATE
+            ON products
+            FOR EACH ROW
+            EXECUTE FUNCTION calculate_profit()');
     }
+
+
+
 
     public function down()
     {

@@ -4,14 +4,24 @@
 @include('header') <!-- Incluye el archivo header.php -->
 <form class="form-group" method="POST" action="/SaleProducts"> 
     @csrf 
-    <div clas="form-group">
-        <label for="">Id de venta:</label>
-        <input type="number" name="id_sale" class="form-control">
+    <div class="form-group">
+    <label for="">Id de venta:</label>
+            
+        <select name="id_sale" class="form-control">
+            @foreach($sales as $id)
+                <option value="{{ $id }}">{{ $id }}</option>
+            @endforeach
+        </select>
+
         <br>
-        <label for="">Id de producto:</label>
-        <input type="number" name="id_product" class="form-control">
+        <label for="id_product">Producto:</label>
+        <select name="id_product" class="form-control">
+            @foreach($products as $id => $name)
+                <option value="{{ $id }}">{{ $name }}</option>
+            @endforeach
+        </select>
         <br>
-        <label for="">Cantidad:</label>
+        <label for="quantity">Cantidad:</label>
         <input type="number" name="quantity" class="form-control">
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>

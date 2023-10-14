@@ -12,16 +12,16 @@
         <input type="text" name="description" class="form-control">
         <br>
         <label for="">Cantidad:</label>
-        <input type="text" name="quantity" class="form-control">
+        <input type="text" name="quantity" class="form-control" required>
         <br>
         <label for="">Precio:</label>
-        <input type="number" name="price" class="form-control">
+        <input type="number" name="price" class="form-control" required>
         <br>
         <label for="">Costo:</label>
-        <input type="number" name="cost" class="form-control">
-        <br>
+        <input type="number" name="cost" class="form-control" required>
+        <!-- <br>
         <label for="">Ganancia:</label>
-        <input type="number" name="profit" class="form-control">
+        <input type="number" name="profit" class="form-control"> -->
         <br>
         <label for="imagen">Seleccionar una foto:</label>
         <input type="file" name="image" required>

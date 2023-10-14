@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sale_Product;
+use App\Models\Sale;
+use App\Models\Product;
 
 class Sale_ProductController extends Controller
 {
@@ -14,9 +16,14 @@ class Sale_ProductController extends Controller
         $sale_products = Sale_Product::all();
         return view('IndexSaleProduct', compact('sale_products'));
     }
-    public function Create(){
-        return view('SaleProductCreate');
+    public function create()
+    {
+        $sales = Sale::all()->pluck('id');
+        $products = Product::all()->pluck('name', 'id', 'image');
+        
+        return view('SaleProductCreate', compact('sales', 'products'));
     }
+
     public function store(Request $request)
     {
         $SaleProduct = new Sale_Product();
