@@ -38,6 +38,10 @@ Route::put('/Clients/{client}', [ClientController::class, 'update'])->name('clie
 use App\Http\Controllers\ProductController;
 Route::resource('/Products', ProductController::class);
 Route::get('/Product/Create', [ProductController::class, 'Create']);
+Route::delete('/Product/Delete/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::get('/Product/Show/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/Product/Edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('/Product/{product}', [ProductController::class, 'update'])->name('products.update');
 
 use App\Http\Controllers\SaleController;
 Route::resource('/Sales', SaleController::class);
