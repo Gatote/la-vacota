@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Trainers')
+@section('title', 'Clientes')
 @section('content')
 @include('header') <!-- Incluye el archivo header.php -->
 <p>Listado de clientes</p>

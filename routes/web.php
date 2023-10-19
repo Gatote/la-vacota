@@ -46,6 +46,10 @@ Route::put('/Product/{product}', [ProductController::class, 'update'])->name('pr
 use App\Http\Controllers\SaleController;
 Route::resource('/Sales', SaleController::class);
 Route::get('/Sale/Create', [SaleController::class, 'Create']);
+Route::delete('/Sale/Delete/{sale}', [SaleController::class, 'destroy'])->name('sales.destroy');
+Route::get('/Sale/Show/{sale}', [SaleController::class, 'show'])->name('sales.show');
+Route::get('/Sale/Edit/{id}', [SaleController::class, 'edit'])->name('sales.edit');
+Route::put('/Sale/{sale}', [SaleController::class, 'update'])->name('sales.update');
 
 use App\Http\Controllers\Sale_ProductController;
 Route::resource('/SaleProducts', Sale_ProductController::class);
