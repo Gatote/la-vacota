@@ -67,7 +67,7 @@ class SaleController extends Controller
 
         $sale->save();
 
-        return redirect()->route('sales.index')->with('success', 'Venta actualizada con éxito');
+        return redirect()->route('sales.show', $sale->id)->with('success', 'Venta actualizada con éxito');
     }
     public function destroy(string $id)
     {

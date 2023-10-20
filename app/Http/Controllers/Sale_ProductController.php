@@ -15,7 +15,7 @@ class Sale_ProductController extends Controller
     {
         $sale_products = Sale_Product::all();
         return view('IndexSaleProduct', compact('sale_products'));
-    }
+    }   
     public function create()
     {
         $sales = Sale::all()->pluck('id');
@@ -38,30 +38,55 @@ class Sale_ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $sale_product = Sale_Product::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+        if ($sale_product) {
+            return view('SaleProductShow', compact('sale_product'));
+        } else {
+            return redirect()->route('sale_products.index')->with('error', 'Cliente no encontrado.');
+        }
+    }
+    
     public function edit(string $id)
     {
-        //
+        $sale_product = Sale_Product::find($id);
+        $sales = Sale::all()->pluck('id');
+        $products = Product::all()->pluck('name', 'id', 'image');
+        
+        return view('SaleProductEdit', compact('sales', 'products', 'sale_product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        // Validar los datos del formulario
+        $validatedData = $request->validate([
+            'id_sale' => 'required|exists:sales,id',
+            'id_product' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        // Encontrar el registro de SaleProduct que se va a actualizar
+        $saleProduct = Sale_Product::findOrFail($id);
+
+        // Actualizar los campos con los datos validados
+        $saleProduct->id_sale = $validatedData['id_sale'];
+        $saleProduct->id_product = $validatedData['id_product'];
+        $saleProduct->quantity = $validatedData['quantity'];
+
+        // Guardar los cambios en la base de datos
+        $saleProduct->save();
+
+        // Redireccionar a la vista de detalles o a donde desees
+        return redirect()->route('sale_products.show', $saleProduct->id)->with('success', 'Venta actualizada con éxito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $sale_product = Sale_Product::find($id);
+
+        if ($sale_product) {
+            $sale_product->delete();
+            return redirect("/SaleProducts");
+        }
     }
 }

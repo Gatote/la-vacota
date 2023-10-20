@@ -44,9 +44,6 @@ class ClientController extends Controller
         
         return redirect('/Clients');
     }
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $client = Client::find($id);
@@ -57,16 +54,9 @@ class ClientController extends Controller
             return redirect()->route('clients.index')->with('error', 'Cliente no encontrado.');
         }
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        // Aquí debes buscar el cliente por su ID, suponiendo que tienes un modelo llamado "Client"
         $client = Client::find($id);
-    
-        // Luego, puedes retornar la vista de edición junto con el cliente encontrado
         return view('ClientEdit', compact('client'));
     }
 
@@ -129,12 +119,6 @@ class ClientController extends Controller
 
         return redirect()->route('clients.show', $client->id)->with('success', 'Cliente actualizado con éxito');
     }
-
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $client = Client::find($id); // Obtén el cliente por su ID
