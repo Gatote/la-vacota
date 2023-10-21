@@ -26,7 +26,7 @@ class SaleController extends Controller
         $Sale -> date = $request -> input('date');
         $Sale -> id_client = $request -> input('id_client');
         $Sale -> save();
-        return view("Menu");
+        return redirect("/Sales");
     }
     public function show(string $id)
     {

@@ -31,7 +31,7 @@ class Sale_ProductController extends Controller
         $SaleProduct -> id_product = $request -> input('id_product');
         $SaleProduct -> quantity = $request -> input('quantity');
         $SaleProduct -> save();
-        return view("Menu");
+        return redirect("/SaleProducts");
     }
     /**
      * Display the specified resource.
