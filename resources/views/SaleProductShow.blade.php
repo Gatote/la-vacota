@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Sale Products')
 @section('content')
-@include('header')
 
 <div class="container text-center">
     <h2>Detalles de Venta con Producto</h2>

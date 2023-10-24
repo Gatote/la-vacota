@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Ventas')
 @section('content')
-@include('header') <!-- Incluye el archivo header.php -->
-
 <style>
     /* Agrega el estilo CSS para limitar el ancho de la tabla */
     .table-limit-width {
@@ -35,5 +33,6 @@
         </tbody>
     </table>
 </div>
+                        <a href="/Sale/Create" class="btn btn-success btn-block">Crear Venta</a>
 
 @endsection

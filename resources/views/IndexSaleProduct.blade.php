@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Sale Products')
 @section('content')
-@include('header')
 
 <div class="container">
     <h2 class="text-center">Listado de ventas con sus productos</h2>
@@ -33,4 +32,5 @@
         </tbody>
     </table>
 </div>
+                        <a href="/SaleProduct/Create" class="btn btn-success btn-block">Crear Venta de Producto</a>
 @endsection

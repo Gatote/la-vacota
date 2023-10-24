@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Productos')
 @section('content')
-@include('header') <!-- Incluye el archivo header.php -->
 <h2>Listado de productos</h2>
 
 <table class="table">
@@ -32,4 +31,5 @@
         @endforeach
     </tbody>
 </table>
+                        <a href="/Product/Create" class="btn btn-success btn-block">Crear Producto</a>
 @endsection

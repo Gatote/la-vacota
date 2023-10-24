@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Detalles del Producto')
 @section('content')
-@include('header') <!-- Incluye el archivo header.php -->
 
 <div class="container text-center">
     <h2>Detalles del Producto</h2>

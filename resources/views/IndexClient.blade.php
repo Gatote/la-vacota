@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Clientes')
 @section('content')
-@include('header') <!-- Incluye el archivo header.php -->
 
 <h2>Listado de clientes</h2>
 
@@ -37,5 +36,5 @@
         @endforeach
     </tbody>
 </table>
-
+                        <a href="/Client/Create" class="btn btn-success btn-block">Crear Cliente</a>
 @endsection

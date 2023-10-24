@@ -29,6 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 use App\Http\Controllers\ClientController;
 Route::resource('/Clients', ClientController::class);
+Route::resource('clients', ClientController::class);
 Route::get('/Client/Create', [ClientController::class, 'Create']);
 Route::delete('/Client/Delete/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
 Route::get('/Client/Show/{client}', [ClientController::class, 'show'])->name('clients.show');

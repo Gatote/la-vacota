@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Nueva Venta')
 @section('content')
-@include('header')
 
 <div class="container text-center">
     <h2>Nueva Venta</h2>
