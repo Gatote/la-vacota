@@ -21,12 +21,18 @@
         {!! Form::label('cost', 'Costo', ['class' => 'form-label']) !!}
         {!! Form::number('cost', null, ['class' => 'form-control', 'required' => 'required']) !!}
     </div>
+    @if(isset($product) && $product->image)
+        <div class="mb-3">
+            {!! Form::label('current_image', 'Imagen actual:', ['class' => 'form-label']) !!}
+            <img src="{{ asset('images/' . $product->image) }}" alt="Imagen actual" class="img-thumbnail" style="max-width: 200px;">
+        </div>
+    @endif
     <div class="mb-3">
         {!! Form::label('image', 'Seleccionar una foto', ['class' => 'form-label']) !!}
-        {!! Form::file('image', ['required']) !!}
+        {!! Form::file('image', isset($product) ? [] : ['required']) !!}
     </div>
 </div>
 <div class="col-md-12 text-center">
     <a href="{{ route('products.index') }}" class="btn btn-secondary">Cancelar</a>
-    {!! Form::submit('Guardar Producto', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit(isset($product) ? 'Guardar Producto' : 'Crear Producto', ['class' => 'btn btn-primary']) !!}
 </div>

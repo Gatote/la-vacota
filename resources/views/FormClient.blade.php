@@ -30,6 +30,14 @@
                     {!! Form::label('debt_comment', 'Comentarios', ['class' => 'form-label']) !!}
                     {!! Form::text('debt_comment', null, ['class' => 'form-control']) !!}
                 </div>
+                @if(isset($client) && $client->image)
+                    <div class="mb-3">
+                        {!! Form::label('current_image', 'Imagen actual:', ['class' => 'form-label']) !!}
+                        <img src="{{ asset('images/' . $client->image) }}" alt="Imagen actual" class="img-thumbnail" style="max-width: 200px;">
+                    </div>
+                @endif
+
+
                 <div class="mb-3">
                     {!! Form::label('image', 'Seleccionar una foto (opcional)', ['class' => 'form-label']) !!}
                     {!! Form::file('image', ['class' => 'form-control']) !!}
