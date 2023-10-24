@@ -16,9 +16,10 @@ class SaleController extends Controller
         $sales = Sale::all();
         return view('IndexSale', compact('sales'));
     }
-    public function Create(){
-        $clientIds = Client::pluck('id');
-        return view('SaleCreate', compact('clientIds'));
+    public function create()
+    {
+        $clients = Client::select('id', 'name', 'lastname')->get();
+        return view('SaleCreate', compact('clients'));
     }
     public function store(Request $request)
     {
@@ -41,9 +42,8 @@ class SaleController extends Controller
     public function edit(string $id)
     {
         $sale = Sale::find($id);
-        $clientIds = Client::pluck('id');
-        
-        return view('SaleEdit', compact('sale', 'clientIds'));
+        $clients = Client::select('id', 'name', 'lastname')->get();
+        return view('SaleEdit', compact('sale', 'clients'));
     }
     public function update(Request $request, $id)
     {

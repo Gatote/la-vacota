@@ -38,6 +38,7 @@ Route::put('/Clients/{client}', [ClientController::class, 'update'])->name('clie
 
 use App\Http\Controllers\ProductController;
 Route::resource('/Products', ProductController::class);
+Route::resource('products', ProductController::class);
 Route::get('/Product/Create', [ProductController::class, 'Create']);
 Route::delete('/Product/Delete/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::get('/Product/Show/{product}', [ProductController::class, 'show'])->name('products.show');
@@ -46,6 +47,7 @@ Route::put('/Product/{product}', [ProductController::class, 'update'])->name('pr
 
 use App\Http\Controllers\SaleController;
 Route::resource('/Sales', SaleController::class);
+Route::resource('sales', SaleController::class);
 Route::get('/Sale/Create', [SaleController::class, 'Create']);
 Route::delete('/Sale/Delete/{sale}', [SaleController::class, 'destroy'])->name('sales.destroy');
 Route::get('/Sale/Show/{sale}', [SaleController::class, 'show'])->name('sales.show');
@@ -54,6 +56,7 @@ Route::put('/Sale/{sale}', [SaleController::class, 'update'])->name('sales.updat
 
 use App\Http\Controllers\Sale_ProductController;
 Route::resource('/SaleProducts', Sale_ProductController::class);
+Route::resource('sale_products', Sale_ProductController::class);
 Route::get('/SaleProduct/Create', [Sale_ProductController::class, 'Create']);
 Route::delete('/SaleProduct/Delete/{saleproduct}', [Sale_ProductController::class, 'destroy'])->name('sale_products.destroy');
 Route::get('/SaleProduct/Show/{saleproduct}', [Sale_ProductController::class, 'show'])->name('sale_products.show');
