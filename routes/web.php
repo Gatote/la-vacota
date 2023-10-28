@@ -29,7 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 use App\Http\Controllers\ClientController;
 Route::resource('/Clients', ClientController::class);
-Route::resource('clients', ClientController::class);
+Route::resource('/clients', ClientController::class);
 Route::get('/Client/Create', [ClientController::class, 'Create']);
 Route::delete('/Client/Delete/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
 Route::get('/Client/Show/{client}', [ClientController::class, 'show'])->name('clients.show');
@@ -55,10 +55,9 @@ Route::get('/Sale/Edit/{id}', [SaleController::class, 'edit'])->name('sales.edit
 Route::put('/Sale/{sale}', [SaleController::class, 'update'])->name('sales.update');
 
 use App\Http\Controllers\Sale_ProductController;
-Route::resource('/SaleProducts', Sale_ProductController::class);
 Route::resource('sale_products', Sale_ProductController::class);
+Route::resource('/SaleProducts', Sale_ProductController::class);
 Route::get('/SaleProduct/Create', [Sale_ProductController::class, 'Create']);
-Route::delete('/SaleProduct/Delete/{saleproduct}', [Sale_ProductController::class, 'destroy'])->name('sale_products.destroy');
 Route::get('/SaleProduct/Show/{saleproduct}', [Sale_ProductController::class, 'show'])->name('sale_products.show');
 Route::get('/SaleProduct/Edit/{id}', [Sale_ProductController::class, 'edit'])->name('sale_products.edit');
 Route::put('/SaleProduct/{sale}', [Sale_ProductController::class, 'update'])->name('sale_products.update');

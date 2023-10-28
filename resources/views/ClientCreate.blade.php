@@ -8,7 +8,7 @@
     <div class="card" style="max-width: 800px; margin: 0 auto;">
         
         <div class="card-body">
-                {!! Form::open(['route' => 'clients.store', 'method' => 'POST', 'files' => true]) !!}
+                {!! Form::open(['route' => 'Clients.store', 'method' => 'POST', 'files' => true]) !!}
             @include("FormClient")
     </div>
 </div>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sale;
+use App\Models\Product;
+use App\Models\Sale_Product;
 use App\Models\Client;
 
 
@@ -14,7 +16,9 @@ class SaleController extends Controller
     public function index()
     {
         $sales = Sale::all();
-        return view('IndexSale', compact('sales'));
+        $products = Product::all();
+
+        return view('IndexSale', compact('sales', 'products'));
     }
     public function create()
     {
@@ -34,9 +38,16 @@ class SaleController extends Controller
         $sale = Sale::find($id);
 
         if ($sale) {
-            return view('SaleShow', compact('sale'));
+            // Obtén el cliente relacionado con esta venta
+            $client = Client::find($sale->id_client);
+
+            if ($client) {
+                return view('SaleShow', compact('sale', 'client'));
+            } else {
+                return redirect()->route('sales.index')->with('error', 'Cliente no encontrado.');
+            }
         } else {
-            return redirect()->route('sales.index')->with('error', 'Cliente no encontrado.');
+            return redirect()->route('sales.index')->with('error', 'Venta no encontrada.');
         }
     }
     public function edit(string $id)
