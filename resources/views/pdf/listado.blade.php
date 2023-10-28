@@ -4,16 +4,18 @@
 
 <h2>Listado de clientes</h2>
 
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
+            <th>Apellidos</th>
             <th>Colonia</th>
             <th>Dirección</th>
             <th>Celular</th>
             <th>Deuda</th>
             <th>Comentarios</th>
+            <th>Imagen</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -21,22 +23,21 @@
         @foreach ($clients as $client)
             <tr>
                 <td>{{ $client->id }}</td>
-                <td>{{ $client->name }} {{ $client->lastname }}</td>
+                <td>{{ $client->name }}</td>
+                <td>{{ $client->lastname }}</td>
                 <td>{{ $client->colony }}</td>
                 <td>{{ $client->address }}</td>
                 <td>{{ $client->cellphone }}</td>
                 <td>{{ $client->debt }}</td>
                 <td>{{ $client->comment }}</td>
                 <td>
+                    <img src="{{ 'images/' . $client->image }}" alt="{{ $client->name }}" width="100">
+                </td>
+                <td>
                     <!-- Agregar botón para mostrar detalles del cliente -->
                     <a href="{{ route('clients.show', $client->id) }}" class="btn btn-primary">Ver Detalles</a>
-    
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
-<a href="/Client/Create" class="btn btn-success btn-block">Crear Cliente</a>
-<a href="{{ route('Clients.pdf') }}" class="btn btn-primary">Descargar PDF de Clientes</a>
-
-@endsection

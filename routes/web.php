@@ -35,6 +35,7 @@ Route::delete('/Client/Delete/{client}', [ClientController::class, 'destroy'])->
 Route::get('/Client/Show/{client}', [ClientController::class, 'show'])->name('clients.show');
 Route::get('/Clients/Edit/{id}', [ClientController::class, 'edit'])->name('clients.edit');
 Route::put('/Clients/{client}', [ClientController::class, 'update'])->name('clients.update');
+Route::get('DownloadClients', [ClientController::class, 'pdf'])->name('Clients.pdf');
 
 use App\Http\Controllers\ProductController;
 Route::resource('/Products', ProductController::class);
@@ -61,3 +62,4 @@ Route::get('/SaleProduct/Create', [Sale_ProductController::class, 'Create']);
 Route::get('/SaleProduct/Show/{saleproduct}', [Sale_ProductController::class, 'show'])->name('sale_products.show');
 Route::get('/SaleProduct/Edit/{id}', [Sale_ProductController::class, 'edit'])->name('sale_products.edit');
 Route::put('/SaleProduct/{sale}', [Sale_ProductController::class, 'update'])->name('sale_products.update');
+

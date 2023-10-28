@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Support\Facades\Storage;
+use PDF;
+
 
 class ClientController extends Controller
 {
@@ -135,4 +137,11 @@ class ClientController extends Controller
             return redirect("/Clients");
         }
     }
+    public function pdf()
+    {
+        $clients = Client::all();
+        $pdf = PDF::loadView('pdf.listado', compact('clients'));
+        return $pdf->download('Clients.pdf');
+    }
+
 }
