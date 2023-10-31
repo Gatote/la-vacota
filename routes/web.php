@@ -64,6 +64,7 @@ Route::get('/SaleProduct/Edit/{id}', [Sale_ProductController::class, 'edit'])->n
 Route::put('/SaleProduct/{sale}', [Sale_ProductController::class, 'update'])->name('sale_products.update');
 
 use App\Http\Controllers\SearchController;
-Route::get('/search/clients', [SearchController::class, 'index'])->name('search');
-Route::get('/search/products', [SearchController::class, 'index'])->name('search');
-Route::get('/search/sales', [SearchController::class, 'index'])->name('search');
+Route::get('search/clients', [SearchController::class, 'searchClients'])->name('search.clients');
+Route::get('search/products', [SearchController::class, 'searchProducts'])->name('search.products');
+Route::get('search/sales', [SearchController::class, 'searchSales'])->name('search.sales');
+

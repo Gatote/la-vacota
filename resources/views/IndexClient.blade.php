@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('title', 'Clientes')
 @section('content')
-
+ 
 <h2>Listado de clientes</h2>
 
-<form action="{{ route('search/client') }}" method="GET">
+<form action="{{ route('search/clients') }}" method="GET">
     <input type="text" name="query" placeholder="Buscar...">
     <button type="submit">Buscar</button>
 </form>

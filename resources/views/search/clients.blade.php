@@ -4,7 +4,7 @@
 
 <h2>Resultados de Búsqueda</h2>
 
-<form action="{{ route('search') }}" method="GET">
+<form action="{{ route('search.clients') }}" method="GET">
     <input type="text" name="query" placeholder="Buscar...">
     <button type="submit">Buscar</button>
 </form>
