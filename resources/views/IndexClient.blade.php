@@ -4,6 +4,12 @@
 
 <h2>Listado de clientes</h2>
 
+<form action="{{ route('search/client') }}" method="GET">
+    <input type="text" name="query" placeholder="Buscar...">
+    <button type="submit">Buscar</button>
+</form>
+
+
 <table class="table">
     <thead>
         <tr>

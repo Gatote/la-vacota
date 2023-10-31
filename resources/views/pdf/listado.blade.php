@@ -1,4 +1,3 @@
-@extends('layouts.app')
 @section('title', 'Clientes')
 @section('content')
 
@@ -16,7 +15,6 @@
             <th>Deuda</th>
             <th>Comentarios</th>
             <th>Imagen</th>
-            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -32,10 +30,6 @@
                 <td>{{ $client->comment }}</td>
                 <td>
                     <img src="{{ 'images/' . $client->image }}" alt="{{ $client->name }}" width="100">
-                </td>
-                <td>
-                    <!-- Agregar botón para mostrar detalles del cliente -->
-                    <a href="{{ route('clients.show', $client->id) }}" class="btn btn-primary">Ver Detalles</a>
                 </td>
             </tr>
         @endforeach

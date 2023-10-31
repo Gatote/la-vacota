@@ -63,3 +63,7 @@ Route::get('/SaleProduct/Show/{saleproduct}', [Sale_ProductController::class, 's
 Route::get('/SaleProduct/Edit/{id}', [Sale_ProductController::class, 'edit'])->name('sale_products.edit');
 Route::put('/SaleProduct/{sale}', [Sale_ProductController::class, 'update'])->name('sale_products.update');
 
+use App\Http\Controllers\SearchController;
+Route::get('/search/clients', [SearchController::class, 'index'])->name('search');
+Route::get('/search/products', [SearchController::class, 'index'])->name('search');
+Route::get('/search/sales', [SearchController::class, 'index'])->name('search');

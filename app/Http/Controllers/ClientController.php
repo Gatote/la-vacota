@@ -7,14 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+use Laravel\Scout\Searchable;
 
 
 class ClientController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $clients = Client::all();
-        return view('IndexClient', compact('clients'));
+        $query = $request->input('query');
+        $results = Client::search($query)->get();
+
+        return view('search.results', compact('results'));
     }
     public function Create(){
         return view('ClientCreate');
