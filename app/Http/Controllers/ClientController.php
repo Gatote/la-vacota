@@ -17,7 +17,7 @@ class ClientController extends Controller
         $query = $request->input('query');
         $results = Client::search($query)->get();
 
-        return view('search.results', compact('results'));
+        return view('search.clients', compact('results'));
     }
     public function Create(){
         return view('ClientCreate');
