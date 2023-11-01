@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 use PDF;
+use Laravel\Scout\Searchable;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-        return view('IndexProduct', compact('products'));
+        $query = $request->input('query');
+        $results = Product::search($query)->get();
+
+        return view('search.products', compact('results'));
     }
     public function Create(){
         return view('ProductCreate');

@@ -36,7 +36,6 @@
                 <td>
                     <!-- Agregar botón para mostrar detalles del cliente -->
                     <a href="{{ route('clients.show', $client->id) }}" class="btn btn-primary">Ver Detalles</a>
-    
                 </td>
             </tr>
         @endforeach
@@ -46,3 +45,4 @@
 <a href="{{ route('Clients.pdf') }}" class="btn btn-primary">Descargar PDF de Clientes</a>
 
 @endsection
+

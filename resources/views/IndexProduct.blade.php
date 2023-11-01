@@ -3,6 +3,11 @@
 @section('content')
 <h2>Listado de productos</h2>
 
+<form action="{{ route('search/products') }}" method="GET">
+    <input type="text" name="query" placeholder="Buscar...">
+    <button type="submit">Buscar</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -20,12 +25,6 @@
                 <td>{{ $product->description }}</td>
                 <td>
                     <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver Detalles</a>
-                    <!-- <a href="{{ route('products.edit', $product->id) }}" class="btn btn-success">Editar</a> -->
-                    <!-- <form method="POST" action="{{ route('products.destroy', $product->id) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form> -->
                 </td>
             </tr>
         @endforeach

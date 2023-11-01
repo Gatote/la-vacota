@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title', 'Resultados de Búsqueda')
+@section('title', 'Resultados de Búsqueda de Productos')
 @section('content')
 
-<h2>Resultados de Búsqueda</h2>
+<h2>Resultados de Búsqueda de Productos</h2>
 
-<form action="{{ route('search.clients') }}" method="GET">
+<form action="{{ route('search.products') }}" method="GET">
     <input type="text" name="query" placeholder="Buscar...">
     <button type="submit">Buscar</button>
 </form>
@@ -15,26 +15,18 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Colonia</th>
-                <th>Dirección</th>
-                <th>Celular</th>
-                <th>Deuda</th>
-                <th>Comentarios</th>
+                <th>Descripción</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($results as $client)
+            @foreach ($results as $product)
                 <tr>
-                    <td>{{ $client->id }}</td>
-                    <td>{{ $client->name }} {{ $client->lastname }}</td>
-                    <td>{{ $client->colony }}</td>
-                    <td>{{ $client->address }}</td>
-                    <td>{{ $client->cellphone }}</td>
-                    <td>{{ $client->debt }}</td>
-                    <td>{{ $client->comment }}</td>
+                    <td>{{ $product->id }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->description }}</td>
                     <td>
-                        <a href="{{ route('clients.show', $client->id) }}" class="btn btn-primary">Ver Detalles</a>
+                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver Detalles</a>
                     </td>
                 </tr>
             @endforeach
@@ -44,7 +36,7 @@
     <p>No se encontraron resultados para la consulta: <strong>{{ request('query') }}</strong></p>
 @endif
 
-<a href="/Client/Create" class="btn btn-success btn-block">Crear Cliente</a>
-<a href="{{ route('Clients.pdf') }}" class="btn btn-primary">Descargar PDF de Clientes</a>
+<a href="/Product/Create" class="btn btn-success btn-block">Crear Producto</a>
+<a href="{{ route('Products.pdf') }}" class="btn btn-primary">Descargar PDF de Productos</a>
 
 @endsection
