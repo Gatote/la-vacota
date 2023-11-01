@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Productos')
 @section('content')
+
 <h2>Listado de productos</h2>
 
 <form action="{{ route('search/products') }}" method="GET">
