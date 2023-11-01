@@ -31,5 +31,6 @@
         @endforeach
     </tbody>
 </table>
-                        <a href="/Product/Create" class="btn btn-success btn-block">Crear Producto</a>
+<a href="/Product/Create" class="btn btn-success btn-block">Crear Producto</a>
+<a href="{{ route('Products.pdf') }}" class="btn btn-primary">Descargar PDF de Productos</a>
 @endsection

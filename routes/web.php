@@ -45,6 +45,7 @@ Route::delete('/Product/Delete/{product}', [ProductController::class, 'destroy']
 Route::get('/Product/Show/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/Product/Edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/Product/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::get('DownloadProducts', [ProductController::class, 'pdf'])->name('Products.pdf');
 
 use App\Http\Controllers\SaleController;
 Route::resource('/Sales', SaleController::class);

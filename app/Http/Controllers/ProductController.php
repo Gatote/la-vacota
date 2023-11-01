@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -137,5 +137,12 @@ class ProductController extends Controller
             $product->delete();
             return redirect("/Products");
         }
+    }
+
+    public function pdf()
+    {
+        $products = Product::all();
+        $pdf = PDF::loadView('pdf.products', compact('products'));
+        return $pdf->download('Products.pdf');
     }
 }
