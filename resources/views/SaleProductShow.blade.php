@@ -11,13 +11,13 @@
         <div class="card-body">
             <h5 class="card-title">Número de Venta: {{$sale_product->id_sale}}</h5>
             <ul class="list-group">
-                <li class="list-group-item">Número de Producto: {{$sale_product->id_product}}</li>
+                <li class="list-group-item">Producto: {{ $product->name }}</li>
                 <li class="list-group-item">Cantidad: {{$sale_product->quantity}}</li>
             </ul>
         </div>
         <div class="card-footer">
             <a href="{{ route('sale_products.edit', $sale_product->id) }}" class="btn btn-success">Editar</a>
-            <form method="POST" action="{{ route('sale_products.destroy', $sale_product->id)}}">
+            <form method="POST" action="{{ route('sale_products.destroy', $sale_product->id) }}">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Eliminar</button>

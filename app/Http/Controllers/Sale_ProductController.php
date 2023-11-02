@@ -14,8 +14,11 @@ class Sale_ProductController extends Controller
     public function index()
     {
         $sale_products = Sale_Product::all();
-        return view('IndexSaleProduct', compact('sale_products'));
-    }   
+        $products = Product::all()->pluck('name', 'id');
+
+        return view('IndexSaleProduct', compact('sale_products', 'products'));
+    }
+
     public function create()
     {
         $sales = Sale::all()->pluck('id');
@@ -39,13 +42,14 @@ class Sale_ProductController extends Controller
     public function show(string $id)
     {
         $sale_product = Sale_Product::find($id);
-
         if ($sale_product) {
-            return view('SaleProductShow', compact('sale_product'));
+            $product = Product::find($sale_product->id_product); // Obtener el producto asociado a la venta
+            return view('SaleProductShow', compact('sale_product', 'product'));
         } else {
-            return redirect()->route('sale_products.index')->with('error', 'Cliente no encontrado.');
+            return redirect()->route('sale_products.index')->with('error', 'Venta de producto no encontrada.');
         }
     }
+
     
     public function edit(string $id)
     {

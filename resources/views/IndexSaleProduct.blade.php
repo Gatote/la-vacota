@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>Número de Venta</th>
-                <th>Número de Producto</th>
+                <th>Nombre del Producto</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -17,7 +17,7 @@
             @foreach ($sale_products as $sale_product)
                 <tr>
                     <td>{{$sale_product->id_sale}}</td>
-                    <td>{{ $sale_product->id_product }}</td>
+                    <td>{{ $products[$sale_product->id_product] }}</td>
                     <td>
                         <a href="{{ route('sale_products.show', $sale_product->id) }}" class="btn btn-primary">Ver Detalles</a>
                         <!-- <a href="{{ route('sale_products.edit', $sale_product->id) }}" class="btn btn-success">Editar</a>
@@ -32,5 +32,5 @@
         </tbody>
     </table>
 </div>
-                        <a href="/SaleProduct/Create" class="btn btn-success btn-block">Crear Venta de Producto</a>
+<a href="/SaleProduct/Create" class="btn btn-success btn-block">Crear Venta de Producto</a>
 @endsection

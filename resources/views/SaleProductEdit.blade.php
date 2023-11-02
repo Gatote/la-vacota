@@ -6,7 +6,7 @@
     <h2>Editar Venta de Producto</h2>
 </div>
 
-<div class "container mt-4">
+<div class = "container mt-4">
     <div class="card" style="max-width: 400px; margin: 0 auto;">
         <div class="card-body">
             <form class="form-group" method="POST" action="{{ route('sale_products.update', $sale_product->id) }}" enctype="multipart/form-data">
