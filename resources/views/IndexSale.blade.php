@@ -2,27 +2,24 @@
 @section('title', 'Ventas')
 @section('content')
 @php
-use App\Models\Client; // Importa el modelo Client
+use App\Models\Client;
 use App\Models\Product;
 use App\Models\Sale_Product;
 @endphp
 
 <style>
-    /* Agrega el estilo CSS para limitar el ancho de la tabla */
-    .table-limit-width {
-        max-width: 100%;
-    }
-
-    /* Estilo para las tarjetas de ventas */
-    .sale-card {
-        border: 1px solid #e2e2e2;
-        border-radius: 5px;
-        margin: 10px;
-        padding: 10px;
-    }
+    /* Estilos CSS */
 </style>
 
 <h2>Listado de Ventas</h2>
+
+<form action="{{ route('sales.index') }}" method="GET" class="form-inline">
+    <div class="form-group mx-sm-3">
+        <label for="search">Buscar por cliente:</label>
+        <input type="text" class="form-control" id="search" name="query" placeholder="Nombre del cliente">
+    </div>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
 
 <div class="row">
     @foreach ($sales as $sale)
@@ -36,7 +33,6 @@ use App\Models\Sale_Product;
                     @foreach($sale->products as $product)
                         <li>{{ $product->name }}</li>
                     @endforeach
-                    
                 </ul>
                 <a href="{{ route('sales.show', $sale->id) }}" class="btn btn-primary">Ver Detalles</a>
             </div>

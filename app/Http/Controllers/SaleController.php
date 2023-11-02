@@ -9,17 +9,23 @@ use App\Models\Sale;
 use App\Models\Product;
 use App\Models\Sale_Product;
 use App\Models\Client;
+use PDF;
 
 
 class SaleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $sales = Sale::all();
-        $products = Product::all();
+        $searchQuery = $request->input('query');
 
-        return view('IndexSale', compact('sales', 'products'));
+        $sales = Sale::whereHas('client', function($query) use ($searchQuery) {
+            $query->where('name', 'like', '%' . $searchQuery . '%');
+        })->get();
+        
+
+        return view('search.sales', compact('sales'));
     }
+
     public function create()
     {
         $clients = Client::select('id', 'name', 'lastname')->get();
@@ -88,5 +94,11 @@ class SaleController extends Controller
             $sale->delete();
             return redirect("/Sales");
         }
+    }
+    public function pdf()
+    {
+        $saless = Sale::all();
+        $pdf = PDF::loadView('pdf.sales', compact('saless'));
+        return $pdf->download('Sales.pdf');
     }
 }

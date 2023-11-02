@@ -10,4 +10,10 @@ class Client extends Model
 {
     use HasFactory;
     use Searchable;
+    
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'id_client', 'id');
+    }
+
 }
