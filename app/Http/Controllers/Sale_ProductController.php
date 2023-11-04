@@ -26,19 +26,22 @@ class Sale_ProductController extends Controller
         
         return view('SaleProductCreate', compact('sales', 'products'));
     }
-
     public function store(Request $request)
     {
-        $SaleProduct = new Sale_Product();
-        $SaleProduct -> id_sale = $request -> input('id_sale');
-        $SaleProduct -> id_product = $request -> input('id_product');
-        $SaleProduct -> quantity = $request -> input('quantity');
-        $SaleProduct -> save();
+        $request->validate([
+            'id_sale' => 'required|integer|min:1',
+            'id_product' => 'required|integer|min:1',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $saleProduct = new Sale_Product();
+        $saleProduct->id_sale = $request->input('id_sale');
+        $saleProduct->id_product = $request->input('id_product');
+        $saleProduct->quantity = $request->input('quantity');
+        $saleProduct->save();
+
         return redirect("/SaleProducts");
     }
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $sale_product = Sale_Product::find($id);

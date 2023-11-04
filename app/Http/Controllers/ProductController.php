@@ -23,34 +23,32 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
-        $Product = new Product();
-        $Product -> name = $request -> input('name');
-        $Product -> description = $request -> input('description');
-        $Product -> quantity = $request -> input('quantity');
-        $Product -> price = $request -> input('price');
-        $Product -> cost = $request -> input('cost');
-        
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+            'cost' => 'required|numeric|min:0',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:1048',
+        ]);
 
-        
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->quantity = $request->input('quantity');
+        $product->price = $request->input('price');
+        $product->cost = $request->input('cost');
+
         if ($request->hasFile('image')) {
-            // Validar y guardar la imagen
-            $request->validate([
-                'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:1048',
-            ]);
-
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images'), $imageName);
-
-            $Product->image = $imageName; // Guardar el nombre de la imagen en el modelo
+            $product->image = $imageName;
         }
 
-        $Product -> save();
+        $product->save();
+        
         return redirect('/Products');
-
     }
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $product = Product::find($id);

@@ -33,10 +33,16 @@ class SaleController extends Controller
     }
     public function store(Request $request)
     {
-        $Sale = new Sale();
-        $Sale -> date = $request -> input('date');
-        $Sale -> id_client = $request -> input('id_client');
-        $Sale -> save();
+        $request->validate([
+            'date' => 'required|date',
+            'id_client' => 'required|integer|min:1',
+        ]);
+
+        $sale = new Sale();
+        $sale->date = $request->input('date');
+        $sale->id_client = $request->input('id_client');
+        $sale->save();
+
         return redirect("/Sales");
     }
     public function show(string $id)

@@ -24,6 +24,17 @@ class ClientController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'colony' => 'required|string|max:255',
+            'address' => 'required|string',
+            'cellphone' => 'required|string|max:15',
+            'debt' => 'required|numeric',
+            'debt_comment' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:1048',
+        ]);
+
         $client = new Client();
         $client->name = $request->input('name');
         $client->lastname = $request->input('lastname');
@@ -31,24 +42,19 @@ class ClientController extends Controller
         $client->address = $request->input('address');
         $client->cellphone = $request->input('cellphone');
         $client->debt = $request->input('debt');
-        $client->comment = $request->input('debt_comment'); // Corregí el nombre del campo
+        $client->comment = $request->input('debt_comment');
 
         if ($request->hasFile('image')) {
-            // Validar y guardar la imagen
-            $request->validate([
-                'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:1048',
-            ]);
-
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('images'), $imageName);
-
-            $client->image = $imageName; // Guardar el nombre de la imagen en el modelo
+            $client->image = $imageName;
         }
 
         $client->save();
         
         return redirect('/Clients');
     }
+
     public function show(string $id)
     {
         $client = Client::find($id);
