@@ -13,7 +13,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Nombre</th>
             <th>Colonia</th>
             <th>Dirección</th>
@@ -26,7 +26,7 @@
     <tbody>
         @foreach ($clients as $client)
             <tr>
-                <td>{{ $client->id }}</td>
+                <!-- <td>{{ $client->id }}</td> -->
                 <td>{{ $client->name }} {{ $client->lastname }}</td>
                 <td>{{ $client->colony }}</td>
                 <td>{{ $client->address }}</td>

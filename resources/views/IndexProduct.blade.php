@@ -12,7 +12,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Acciones</th>
@@ -21,7 +21,7 @@
     <tbody>
         @foreach ($products as $product)
             <tr>
-                <td>{{ $product->id }}</td>
+                <!-- <td>{{ $product->id }}</td> -->
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->description }}</td>
                 <td>
