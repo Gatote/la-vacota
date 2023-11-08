@@ -2,12 +2,36 @@
 <html>
 <head>
     <title>Listado de Clientes</title>
+    <style>
+        /* Agrega estilos personalizados si es necesario */
+        .header {
+            text-align: center;
+        }
+        .logo {
+            max-width: 200px; /* Ajusta el ancho según tus necesidades */
+        }
+        .address {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Listado de clientes</h2>
-    @if (!empty(request('query')))
-        <p>Consulta actual: {{ request('query') }}</p>
+    <div class="header">
+        <img src="{{ public_path('images/logo.jpeg') }}" alt="Logo" class="logo">
+        <h1>LA VACOTA DE LA BATEA</h1>
+        <p>Elaborado por Eva Hamm Klassen (dueño/gerente)</p>
+    </div>
+    <div class="address">
+        <p>Campo Menonita No. 2 La Batea</p>
+        <p>Municipio de Sombrerete, Zacatecas</p>
+    </div>
+
+    @if (!empty($query))
+        <p>Consulta actual: {{ $query }}</p>
     @endif
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -32,7 +56,7 @@
                     <td>{{ $client->debt }}</td>
                     <td>{{ $client->comment }}</td>
                     <td>
-                        <img src="{{ 'images/' . $client->image }}" alt="{{ $client->name }}" width="100">
+                        <img src="{{ public_path('images/' . $client->image) }}" alt="{{ $client->name }}" width="100">
                     </td>
                 </tr>
             @endforeach
