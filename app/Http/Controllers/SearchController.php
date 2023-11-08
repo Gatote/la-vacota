@@ -12,10 +12,21 @@ class SearchController extends Controller
     public function searchClients(Request $request)
     {
         $query = $request->input('query');
-        $results = Client::search($query)->get();
+
+        $results = Client::where(function ($queryBuilder) use ($query) {
+            $lowerQuery = mb_strtolower($query, 'UTF-8');
+            $queryBuilder->whereRaw("LOWER(name) LIKE ?", ["%$lowerQuery%"])
+                        ->orWhereRaw("LOWER(lastname) LIKE ?", ["%$lowerQuery%"])
+                        ->orWhereRaw("LOWER(colony) LIKE ?", ["%$lowerQuery%"])
+                        ->orWhereRaw("LOWER(address) LIKE ?", ["%$lowerQuery%"])
+                        ->orWhere('cellphone', 'like', '%' . $query . '%')
+                        ->orWhere('debt', 'like', '%' . $query . '%')
+                        ->orWhereRaw("LOWER(comment) LIKE ?", ["%$lowerQuery%"]);
+        })->get();
 
         return view('search.clients', compact('results'));
     }
+
 
     public function searchProducts(Request $request)
     {
