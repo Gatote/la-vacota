@@ -146,11 +146,24 @@ class ClientController extends Controller
             return redirect("/Clients");
         }
     }
-    public function pdf()
+    public function pdf(Request $request)
     {
-        $clients = Client::all();
-        $pdf = PDF::loadView('pdf.clients', compact('clients'));
+        $query = $request->query('query', ''); // Obtenemos el valor de 'query' de la URL, o una cadena vacía si no está presente.
+        
+        $clients = Client::where(function ($queryBuilder) use ($query) {
+            $lowerQuery = mb_strtolower($query, 'UTF-8');
+            $queryBuilder->whereRaw("LOWER(name) LIKE ?", ["%$lowerQuery%"])
+                        ->orWhereRaw("LOWER(lastname) LIKE ?", ["%$lowerQuery%"])
+                        ->orWhereRaw("LOWER(colony) LIKE ?", ["%$lowerQuery%"])
+                        ->orWhereRaw("LOWER(address) LIKE ?", ["%$lowerQuery%"])
+                        ->orWhere('cellphone', 'like', '%' . $query . '%')
+                        ->orWhere('debt', 'like', '%' . $query . '%')
+                        ->orWhereRaw("LOWER(comment) LIKE ?", ["%$lowerQuery%"]);
+        })->get();
+
+        $pdf = PDF::loadView('pdf.clients', compact('clients', 'query'));
         return $pdf->download('Clients.pdf');
     }
+
 
 }

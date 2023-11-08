@@ -14,7 +14,7 @@
             @endif
             <div class="d-flex">
                 <a href="/Client/Create" class="btn btn-success">Crear Cliente</a>
-                <a href="{{ route('Clients.pdf') }}" class="btn btn-primary ml-2">Descargar PDF de Clientes</a>
+                <a href="{{ route('Clients.pdf', ['query' => request('query')]) }}" class="btn btn-primary ml-2">Descargar PDF de Clientes</a>
             </div>
         </div>
         <div class="card-body" style="overflow: auto; max-height: calc(100% - 56px);">
