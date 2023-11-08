@@ -11,6 +11,8 @@
             </form>
             @if (request()->has('query') && !empty(request('query')))
                 <h4>Mostrando resultados para {{ request('query') }}</h4>
+            @else
+                <h4>Listado general de clientes</h4>
             @endif
             <div class="d-flex">
                 <a href="/Client/Create" class="btn btn-success">Crear Cliente</a>
@@ -18,28 +20,32 @@
             </div>
         </div>
         <div class="card-body" style="overflow: auto; max-height: calc(100% - 56px);">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="sticky-header">Nombre</th>
-                        <th class="sticky-header">Colonia</th>
-                        <th class="sticky-header">Dirección</th>
-                        <th class="sticky-header">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($results as $client)
+            @if ($results->isEmpty())
+                <p>No se encontraron resultados para la consulta: <strong>{{ request('query') }}</strong></p>
+            @else
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>{{ $client->name }} {{ $client->lastname }}</td>
-                            <td>{{ $client->colony }}</td>
-                            <td>{{ $client->comment }}</td>
-                            <td>
-                                <a href="{{ route('clients.show', $client->id) }}" class="btn btn-primary">Ver Detalles</a>
-                            </td>
+                            <th class="sticky-header">Nombre</th>
+                            <th class="sticky-header">Colonia</th>
+                            <th class="sticky-header">Dirección</th>
+                            <th class="sticky-header">Acciones</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($results as $client)
+                            <tr>
+                                <td>{{ $client->name }} {{ $client->lastname }}</td>
+                                <td>{{ $client->colony }}</td>
+                                <td>{{ $client->comment }}</td>
+                                <td>
+                                    <a href="{{ route('clients.show', $client->id) }}" class="btn btn-primary">Ver Detalles</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </div>
     </div>
 </div>
