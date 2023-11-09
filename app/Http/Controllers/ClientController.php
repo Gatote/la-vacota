@@ -164,6 +164,4 @@ class ClientController extends Controller
         $pdf = PDF::loadView('pdf.clients', compact('clients', 'query'));
         return $pdf->download('Clients.pdf');
     }
-
-
 }

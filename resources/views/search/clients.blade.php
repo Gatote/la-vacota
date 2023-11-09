@@ -2,7 +2,7 @@
 @section('title', 'Resultados de Búsqueda')
 @section('content')
 
-<div class="d-flex justify-content-center" style="max-height: 600px;">
+<div class="d-flex justify-content-center" style="max-height: 500px;">
     <div class="card rounded" style="width: 80%; max-height: 100%; overflow: hidden;">
         <div class="card-header d-flex justify-content-between align-items-center">
             <form action="{{ route('search.clients') }}" method="GET">

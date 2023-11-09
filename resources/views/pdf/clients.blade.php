@@ -21,7 +21,7 @@
     <div class="header">
         <img src="{{ public_path('images/logo.jpeg') }}" alt="Logo" class="logo">
         <h1>LA VACOTA DE LA BATEA</h1>
-        <p>Elaborado por Eva Hamm Klassen (dueño/gerente)</p>
+        <p>Elaborado por Eva Hamm Klassen</p>
     </div>
     <div class="address">
         <p>Campo Menonita No. 2 La Batea</p>

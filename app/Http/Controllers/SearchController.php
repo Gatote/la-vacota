@@ -26,8 +26,6 @@ class SearchController extends Controller
 
         return view('search.clients', compact('results'));
     }
-
-
     public function searchProducts(Request $request)
     {
         $query = $request->input('query');
@@ -35,7 +33,6 @@ class SearchController extends Controller
 
         return view('search.products', compact('results'));
     }
-
     public function searchSales(Request $request)
     {
         $query = $request->input('query');
@@ -43,5 +40,4 @@ class SearchController extends Controller
 
         return view('search.sales', compact('results'));
     }
-
 }
