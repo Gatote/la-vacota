@@ -54,8 +54,10 @@
                     <td>${{ $product->cost }}</td>
                     <td>${{ $product->profit }}</td>
                     <td>
-                        <img src="{{ public_path('images/' . $product->image) }}" alt="{{ $product->name }}" width="100">
-                    </td>
+            @if (pathinfo($product->image, PATHINFO_EXTENSION) == 'jpg')
+                <img src="{{ public_path('images/' . $product->image) }}" alt="{{ $product->name }}" width="100">
+            @endif
+        </td>
                 </tr>
             @endforeach
         </tbody>

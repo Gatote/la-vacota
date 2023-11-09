@@ -140,11 +140,20 @@ class ProductController extends Controller
             return redirect("/Products");
         }
     }
-
-    public function pdf()
+    public function pdf(Request $request)
     {
-        $products = Product::all();
-        $pdf = PDF::loadView('pdf.products', compact('products'));
+        $query = $request->query('query', ''); // Obtenemos el valor de 'query' de la URL, o una cadena vacía si no está presente.
+        
+        $products = Product::where(function ($queryBuilder) use ($query) {
+            $lowerQuery = mb_strtolower($query, 'UTF-8');
+            $queryBuilder->whereRaw("LOWER(name) LIKE ?", ["%$lowerQuery%"])
+                        ->orWhereRaw("LOWER(description) LIKE ?", ["%$lowerQuery%"])
+                        ->orWhere('price', 'like', '%' . $query . '%')
+                        ->orWhere('cost', 'like', '%' . $query . '%')
+                        ->orWhere('profit', 'like', '%' . $query . '%');
+        })->get();
+    
+        $pdf = PDF::loadView('pdf.products', compact('products', 'query'));
         return $pdf->download('Products.pdf');
-    }
+    }    
 }
