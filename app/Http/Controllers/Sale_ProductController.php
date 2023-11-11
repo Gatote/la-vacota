@@ -20,28 +20,51 @@ class Sale_ProductController extends Controller
     }
 
     public function create()
-    {
-        $sales = Sale::all()->pluck('id');
-        $products = Product::all()->pluck('name', 'id', 'image');
-        
-        return view('SaleProductCreate', compact('sales', 'products'));
-    }
-    public function store(Request $request)
-    {
+{
+    $sales = Sale::all()->pluck('id');
+    $products = Product::all()->pluck('name', 'id', 'image');
+    
+    // Asegúrate de ajustar el nombre de la variable aquí
+    $quantity_of_products = 0;
+
+    return view('SaleProductCreate', compact('sales', 'products', 'quantity_of_products'));
+}
+
+public function store(Request $request)
+{
+    try {
         $request->validate([
             'id_sale' => 'required|integer|min:1',
-            'id_product' => 'required|integer|min:1',
-            'quantity' => 'required|integer|min:1',
+            'products' => 'required|array',
+            'quantity_sold' => 'required|array',
+            'quantity_of_products' => 'required|integer|min:0|max:' . ($request->has('products') ? count($request->input('products')) : 0),
         ]);
+        
+        
 
-        $saleProduct = new Sale_Product();
-        $saleProduct->id_sale = $request->input('id_sale');
-        $saleProduct->id_product = $request->input('id_product');
-        $saleProduct->quantity = $request->input('quantity');
-        $saleProduct->save();
+        $id_sale = $request->input('id_sale');
+        $products = $request->input('products');
+        $quantity_sold = $request->input('quantity_sold');
 
-        return redirect("/SaleProducts");
+        // Guardar cada producto vendido en la venta
+        for ($i = 0; $i < count($products); $i++) {
+            $saleProduct = new Sale_Product();
+            $saleProduct->id_sale = $id_sale;
+            $saleProduct->id_product = $products[$i];
+            $saleProduct->quantity = $quantity_sold[$i];
+            $saleProduct->save();
+        }
+
+        return redirect("/SaleProducts")->with('success', 'Venta creada correctamente');
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
+}
+
+
+
+
+
     public function show(string $id)
     {
         $sale_product = Sale_Product::find($id);

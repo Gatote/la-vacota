@@ -7,11 +7,22 @@
 </div>
 
 <div class="container mt-4">
+    <!-- Agrega esto para mostrar los errores de validación -->
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="card" style="max-width: 400px; margin: 0 auto;">
         <div class="card-body">
             <form class="form-group" method="POST" action="{{ route('sale_products.store') }}" enctype="multipart/form-data">
                 @csrf
-                @include('FormSaleProduct')
+                @include('FormSaleProduct', ['quantity' => old('quantity_of_products', 0)]) <!-- Default a 1 si no se especifica -->
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>
@@ -21,5 +32,8 @@
 <div class="container text-center mt-4">
     <a href="{{ route('sale_products.index') }}" class="btn btn-primary">Volver a la lista de ventas de productos</a>
 </div>
-<!-- Código de instalación Cliengo para la-vacota.com --> <script type="text/javascript">(function () { var ldk = document.createElement('script'); ldk.type = 'text/javascript'; ldk.async = true; ldk.src = 'https://s.cliengo.com/weboptimizer/654262fa8de8db0032e440e7/65440aaabc71c70032c73683.js?platform=onboarding_modular'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ldk, s); })();</script>
+
+<script type="text/javascript">
+    // Tu código JavaScript, si es necesario, puede ir aquí
+</script>
 @endsection
