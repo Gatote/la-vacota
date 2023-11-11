@@ -32,7 +32,7 @@ class ClientController extends Controller
             'cellphone' => 'required|string|max:15',
             'debt' => 'required|numeric',
             'debt_comment' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:1048',
+            'image' => 'nullable|image|mimes:jpeg,jpg,gif,svg|max:1048',
         ]);
 
         $client = new Client();
@@ -109,7 +109,7 @@ class ClientController extends Controller
         if ($request->hasFile('image')) {
             // Validar y guardar la imagen
             $request->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'image|mimes:jpeg,jpg,gif|max:2048',
             ]);
 
             // Eliminar la imagen anterior si existe

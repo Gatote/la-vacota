@@ -37,7 +37,7 @@
                             <tr>
                                 <td>{{ $client->name }} {{ $client->lastname }}</td>
                                 <td>{{ $client->colony }}</td>
-                                <td>{{ $client->comment }}</td>
+                                <td>{{ $client->address }}</td>
                                 <td>
                                     <a href="{{ route('clients.show', $client->id) }}" class="btn btn-primary">Ver Detalles</a>
                                 </td>

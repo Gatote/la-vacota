@@ -29,7 +29,7 @@ class ProductController extends Controller
             'quantity' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
             'cost' => 'required|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:1048',
+            'image' => 'nullable|image|mimes:jpeg,jpg,gif,svg|max:1048',
         ]);
 
         $product = new Product();
@@ -104,7 +104,7 @@ class ProductController extends Controller
     if ($request->hasFile('image')) {
         // Validar y guardar la imagen
         $request->validate([
-            'image' => 'image|mimes:jpeg,jpg,png,gif,svg|max:1048',
+            'image' => 'image|mimes:jpeg,jpg,gif,svg|max:1048',
         ]);
 
         // Eliminar la imagen anterior si existe
