@@ -107,4 +107,21 @@ class SaleController extends Controller
         $pdf = PDF::loadView('pdf.sales', compact('saless'));
         return $pdf->download('Sales.pdf');
     }
+    public function deleteProduct($saleId, $productId)
+    {
+        try {
+            $saleProduct = Sale_Product::where('id_sale', $saleId)
+                ->where('id_product', $productId)
+                ->first();
+
+            if ($saleProduct) {
+                $saleProduct->delete();
+                return redirect()->back()->with('success', 'Producto eliminado exitosamente.');
+            } else {
+                return redirect()->back()->with('error', 'Producto no encontrado en la venta.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
 }

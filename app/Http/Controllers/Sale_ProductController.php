@@ -55,7 +55,7 @@ public function store(Request $request)
             $saleProduct->save();
         }
 
-        return redirect("/SaleProducts")->with('success', 'Venta creada correctamente');
+        return redirect("/Sale/Show/{$id_sale}")->with('success', 'Venta creada correctamente');
     } catch (\Exception $e) {
         return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
@@ -110,13 +110,20 @@ public function store(Request $request)
         return redirect()->route('sale_products.show', $saleProduct->id)->with('success', 'Venta actualizada con éxito');
     }
 
-    public function destroy(string $id)
-    {
-        $sale_product = Sale_Product::find($id);
+    public function destroy($id)
+{
+    try {
+        $saleProduct = Sale_Product::find($id);
 
-        if ($sale_product) {
-            $sale_product->delete();
-            return redirect("/SaleProducts");
+        if ($saleProduct) {
+            $saleProduct->delete();
+            return redirect()->back()->with('success', 'Producto eliminado exitosamente.');
+        } else {
+            return redirect()->back()->with('error', 'Producto no encontrado.');
         }
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
     }
+}
+
 }
