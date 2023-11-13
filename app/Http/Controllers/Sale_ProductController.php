@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Sale_Product;
 use App\Models\Sale;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class Sale_ProductController extends Controller
 {
@@ -104,19 +105,38 @@ class Sale_ProductController extends Controller
         return redirect()->route('sale_products.show', $saleProduct->id)->with('success', 'Venta actualizada con éxito');
     }
 
-    public function destroy($saleProductId)
+    public function destroy($saleId, $saleProductId)
     {
         try {
+            // Obtén la relación específica
             $saleProduct = Sale_Product::find($saleProductId);
     
             if ($saleProduct) {
-                $saleProduct->delete();
-                return redirect()->back()->with('success', 'Producto eliminado exitosamente.');
+                // Crea una transacción para asegurar la integridad de los datos
+                DB::beginTransaction();
+    
+                try {
+                    // Crea una copia del producto asociado a la relación
+                    $copiedProduct = $saleProduct->product->replicate();
+                    $copiedProduct->save();
+    
+                    // Elimina la relación producto-venta
+                    $saleProduct->delete();
+    
+                    // Confirma la transacción
+                    DB::commit();
+    
+                    return redirect()->back()->with('success', 'Relación producto-venta eliminada exitosamente.');
+                } catch (\Exception $e) {
+                    // Revierte la transacción en caso de error
+                    DB::rollBack();
+                    throw $e;
+                }
             } else {
-                return redirect()->back()->with('error', 'Producto no encontrado.');
+                return redirect()->back()->with('error', 'Relación producto-venta no encontrada.');
             }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
-    }
+    }    
 }

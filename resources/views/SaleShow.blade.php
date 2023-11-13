@@ -18,8 +18,9 @@
                     @foreach ($sale->saleProducts as $sale_product)
                         <li>
                             {{$sale_product}}
+                            <br>
                             {{ $sale_product->product->name }}
-                            <form method="POST" action="{{ route('sale_products.destroy', $sale_product->id) }}" style="display: inline;">
+                            <form method="POST" action="{{ route('sale_products.destroy', ['saleId' => $sale->id, 'saleProductId' => $sale_product->id]) }}" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
