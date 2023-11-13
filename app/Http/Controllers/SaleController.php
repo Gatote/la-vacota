@@ -36,6 +36,7 @@ class SaleController extends Controller
         $request->validate([
             'date' => 'required|date',
             'id_client' => 'required|integer|min:1',
+            'quantity_of_products' => 'required|integer|min:1',
         ]);
 
         $sale = new Sale();
@@ -43,18 +44,28 @@ class SaleController extends Controller
         $sale->id_client = $request->input('id_client');
         $sale->save();
 
-        return redirect("/Sales");
+        // Obtén el ID de la venta recién creada
+        $saleId = $sale->id;
+        // Obtén la cantidad de productos del formulario
+        $quantityOfProducts = $request->input('quantity_of_products');
+
+        $sales = Sale::all()->pluck('id');
+        $products = Product::all()->pluck('name', 'id', 'image');
+    
+        // Pasa $saleId y $quantityOfProducts a la vista SaleProductCreate usando compact
+        return view('SaleProductCreate', compact('sales', 'products', 'saleId', 'quantityOfProducts'));
     }
     public function show(string $id)
     {
-        $sale = Sale::find($id);
-
+        $sale = Sale::with('saleProducts')->find($id);
         if ($sale) {
             // Obtén el cliente relacionado con esta venta
             $client = Client::find($sale->id_client);
+            // Obtén el cliente relacionado con esta venta
+            $saleproduct = Sale_Product::find($sale->id_sale_product);
 
             if ($client) {
-                return view('SaleShow', compact('sale', 'client'));
+                return view('SaleShow', compact('sale', 'client', 'saleproduct'));
             } else {
                 return redirect()->route('sales.index')->with('error', 'Cliente no encontrado.');
             }
@@ -107,15 +118,14 @@ class SaleController extends Controller
         $pdf = PDF::loadView('pdf.sales', compact('saless'));
         return $pdf->download('Sales.pdf');
     }
-    public function deleteProduct($saleId, $productId)
+    public function deleteProduct($saleProductId)
     {
+        dd($saleProductId);
         try {
-            $saleProduct = Sale_Product::where('id_sale', $saleId)
-                ->where('id_product', $productId)
-                ->first();
+            $saleProduct = Sale_Product::find($saleProductId);
 
             if ($saleProduct) {
-                $saleProduct->delete();
+                $saleProduct->delete(); // Eliminar el registro de Sale_Product
                 return redirect()->back()->with('success', 'Producto eliminado exitosamente.');
             } else {
                 return redirect()->back()->with('error', 'Producto no encontrado en la venta.');

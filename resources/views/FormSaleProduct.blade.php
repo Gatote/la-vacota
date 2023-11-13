@@ -1,22 +1,15 @@
-
-<div class="form-group">
-    {!! Form::label('quantity_of_products', 'Cantidad de productos:', ['class' => 'form-label']) !!}
-    {!! Form::number('quantity_of_products', $quantity, ['class' => 'form-control', 'id' => 'quantity_of_products']) !!}
-</div>
-
-
-@if ($quantity > 0)
+@if ($quantityOfProducts > 0)
     <div class="form-group">
-        {!! Form::label('id_sale', 'ID de Venta:', ['class' => 'form-label']) !!}
-        <select name="id_sale" class="form-control">
-            @foreach($sales as $id)
-                <option value="{{ $id }}">{{ $id }}</option>
-            @endforeach
+        <!-- {!! Form::label('id_sale', 'ID de Venta:', ['class' => 'form-label']) !!} -->
+        <select name="id_sale" class="form-control" hidden>
+            <option value="{{ $saleId }}">{{ $saleId }}</option>
         </select>
+        <input name="quantityOfProducts" class="form-control" value = $quantityOfProducts hidden>
     </div>
 @endif
+
 <div id="product-select-container">
-    @for ($i = 0; $i < $quantity; $i++)
+    @for ($i = 0; $i < $quantityOfProducts; $i++)
         <div class="form-group" style="display: flex; justify-content: space-between;">
             <label for="products[]">Producto {{ $i + 1 }}:</label>
             <select name="products[]" class="form-control">
@@ -29,4 +22,3 @@
         </div>
     @endfor
 </div>
-

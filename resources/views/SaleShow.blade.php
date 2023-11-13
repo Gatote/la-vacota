@@ -14,23 +14,20 @@
                 <li class="list-group-item">Cliente: {{ $client->name }} {{ $client->lastname }}</li>
                 <li class="list-group-item">Fecha: {{ $sale->date }}</li>
                 <li class="list-group-item">Productos Vendidos:
-                
-                <ul>
-                @foreach ($sale->products as $sale_product)
-    <li>
-        {{ $sale_product->name }}
-        <form method="POST" action="{{ route('sales.deleteProduct', ['saleId' => $sale->id, 'productId' => $sale_product->id]) }}" style="display: inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Eliminar</button>
-        </form>
-        <a href="{{ route('sale_products.show', $sale_product->id) }}" class="btn btn-primary">Mostrar</a>
-    </li>
-@endforeach
-
-</ul>
-
-
+                    <ul>
+                    @foreach ($sale->saleProducts as $sale_product)
+                        <li>
+                            {{$sale_product}}
+                            {{ $sale_product->product->name }}
+                            <form method="POST" action="{{ route('sale_products.destroy', $sale_product->id) }}" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                            <a href="{{ route('sale_products.show', $sale_product->id) }}" class="btn btn-primary">Mostrar</a>
+                        </li>
+                    @endforeach
+                    </ul>
                 </li>
             </ul>
         </div>

@@ -22,7 +22,9 @@
         <div class="card-body">
             <form class="form-group" method="POST" action="{{ route('sale_products.store') }}" enctype="multipart/form-data">
                 @csrf
-                @include('FormSaleProduct', ['quantity' => old('quantity_of_products', 0)]) <!-- Default a 1 si no se especifica -->
+                <!-- Agrega un campo oculto con el ID de la venta -->
+                <input type="hidden" name="sale_id" value="{{ $saleId }}">
+                @include('FormSaleProduct', ['quantity' => old('quantity_of_products', 0)])
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>
