@@ -56,6 +56,7 @@ Route::get('/Sale/Show/{sale}', [SaleController::class, 'show'])->name('sales.sh
 Route::get('/Sale/Edit/{id}', [SaleController::class, 'edit'])->name('sales.edit');
 Route::put('/Sale/{sale}', [SaleController::class, 'update'])->name('sales.update');
 Route::get('DownloadSales', [SaleController::class, 'pdf'])->name('Sales.pdf');
+Route::post('/Sales/GeneratePdf/{saleId}', [SaleController::class, 'generatePdf'])->name('sales.generatePdf');
 
 use App\Http\Controllers\Sale_ProductController;
 Route::resource('sale_products', Sale_ProductController::class);

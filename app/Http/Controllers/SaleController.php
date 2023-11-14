@@ -134,4 +134,20 @@ class SaleController extends Controller
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
     }
+    public function generatePdf(string $id)
+    {
+        $sale = Sale::with('client', 'saleProducts')->find($id);
+        // Obtén el cliente relacionado con esta venta
+        $client = Client::find($sale->id_client);
+
+        if ($sale) {
+            // Cargar la vista PDF
+            $pdf = PDF::loadView('pdf.saleticket', compact('sale', 'client'));
+
+            // Descargar el PDF
+            return $pdf->download('saleticket.pdf');
+        } else {
+            return redirect()->route('sales.index')->with('error', 'Venta no encontrada.');
+        }
+    }
 }
