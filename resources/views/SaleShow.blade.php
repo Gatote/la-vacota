@@ -25,7 +25,6 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
                             </form>
-                            <a href="{{ route('sale_products.show', $sale_product->id) }}" class="btn btn-primary">Mostrar</a>
                         </li>
                     @endforeach
                     </ul>

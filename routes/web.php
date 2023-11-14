@@ -59,11 +59,9 @@ Route::get('DownloadSales', [SaleController::class, 'pdf'])->name('Sales.pdf');
 
 use App\Http\Controllers\Sale_ProductController;
 Route::resource('sale_products', Sale_ProductController::class);
-Route::resource('/SaleProducts', Sale_ProductController::class);
-Route::get('/SaleProduct/Create', [Sale_ProductController::class, 'Create']);
 Route::get('/SaleProduct/Create', [Sale_ProductController::class, 'Create'])->name('sale_product.create');
 Route::post('/SaleProducts', [Sale_ProductController::class, 'store'])->name('sale_products.store');
-Route::get('/SaleProduct/Show/{saleproduct}', [Sale_ProductController::class, 'show'])->name('sale_products.show');
+Route::get('/SaleProduct/Show/{saleProductId}', [Sale_ProductController::class, 'show'])->name('sale_products.show');
 Route::get('/SaleProduct/Edit/{id}', [Sale_ProductController::class, 'edit'])->name('sale_products.edit');
 Route::put('/SaleProduct/{sale}', [Sale_ProductController::class, 'update'])->name('sale_products.update');
 Route::delete('/SaleProduct/Delete/{saleId}/{saleProductId}', [Sale_ProductController::class, 'destroy'])->name('sale_products.destroy');

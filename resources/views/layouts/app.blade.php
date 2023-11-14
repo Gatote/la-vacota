@@ -39,9 +39,6 @@
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/Sales">Ventas</a>
                         </li>
-                        <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/SaleProducts">Ventas y productos</a>
-                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
