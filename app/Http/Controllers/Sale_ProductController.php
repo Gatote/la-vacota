@@ -119,7 +119,10 @@ class Sale_ProductController extends Controller
                     // Crea una copia del producto asociado a la relación
                     $copiedProduct = $saleProduct->product->replicate();
                     $copiedProduct->save();
-    
+                    
+                    // Ejecuta una sentencia SQL personalizada para eliminar la relación producto-venta
+                    DB::statement("UPDATE sale_products SET id_product = ? WHERE id_product = ?", [$copiedProduct->id, $saleProduct->product->id]);
+
                     // Elimina la relación producto-venta
                     $saleProduct->delete();
     

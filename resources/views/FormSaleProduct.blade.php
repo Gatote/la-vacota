@@ -12,7 +12,7 @@
     @for ($i = 0; $i < $quantityOfProducts; $i++)
         <div class="form-group" style="display: flex; justify-content: space-between;">
             <label for="products[]">Producto {{ $i + 1 }}:</label>
-            <select name="products[]" class="form-control" multiple>
+            <select name="products[]" class="form-control">
                 @foreach($products as $id => $name)
                     <option value="{{ $id }}">{{ $name }}</option>
                 @endforeach
