@@ -32,7 +32,11 @@
 </div>
 
 <div class="container text-center mt-4">
-    <a href="{{ route('sale_products.index') }}" class="btn btn-primary">Volver a la lista de ventas de productos</a>
+    <form method="POST" action="{{ route('sales.destroy', $saleId) }}">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-primary">Cancelar venta</button>
+    </form>
 </div>
 
 <script type="text/javascript">

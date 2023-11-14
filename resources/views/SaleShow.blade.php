@@ -35,7 +35,7 @@
                                         <form method="POST" action="{{ route('sale_products.destroy', ['saleId' => $sale->id, 'saleProductId' => $sale_product->id]) }}" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar producto</button>
                                         </form>
                                     </td>
                                 </tr>
