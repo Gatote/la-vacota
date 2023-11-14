@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <div class="card" style="max-width: 400px; margin: 0 auto;">
+    <div class="card" style="width: 800px; margin: 0 auto; padding: 20px;"> <!-- Ajusta el ancho y margen según tus necesidades -->
         <div class="card-body">
             <form class="form-group" method="POST" action="{{ route('sale_products.store') }}" enctype="multipart/form-data">
                 @csrf

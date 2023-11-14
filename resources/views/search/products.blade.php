@@ -28,6 +28,7 @@
                         <tr>
                             <th class="sticky-header">Nombre</th>
                             <th class="sticky-header">Descripción</th>
+                            <th class="sticky-header">Cantidad disponible</th>
                             <th class="sticky-header">Acciones</th>
                         </tr>
                     </thead>
@@ -36,6 +37,7 @@
                             <tr>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->description }}</td>
+                                <td>{{ $product->quantity }}</td>
                                 <td>
                                     <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver Detalles</a>
                                 </td>

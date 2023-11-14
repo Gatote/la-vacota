@@ -45,13 +45,20 @@ class Sale_ProductController extends Controller
             $quantity_sold = $request->input('quantity_sold');
             $quantityOfProducts = $request->input('quantity_sold');
 
-            // Guardar cada producto vendido en la venta
+            // Guardar cada producto vendido en la venta y actualizar la cantidad vendida en la tabla de productos
             for ($i = 0; $i < count($products); $i++) {
                 $saleProduct = new Sale_Product();
                 $saleProduct->id_sale = $id_sale;
                 $saleProduct->id_product = $products[$i];
                 $saleProduct->quantity = $quantity_sold[$i];
                 $saleProduct->save();
+
+                // Obtener el producto correspondiente y reducir la cantidad vendida
+                $product = Product::find($products[$i]);
+                if ($product) {
+                    $product->quantity -= $quantity_sold[$i];
+                    $product->save();
+                }
             }
 
             return redirect("/Sale/Show/{$id_sale}")->with('success', 'Venta creada correctamente');

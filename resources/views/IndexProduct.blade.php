@@ -15,6 +15,7 @@
             <!-- <th>ID</th> -->
             <th>Nombre</th>
             <th>Descripción</th>
+            <th>Cantidad disponible</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -24,6 +25,7 @@
                 <!-- <td>{{ $product->id }}</td> -->
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->description }}</td>
+                <td>{{ $product->quantity }}</td>
                 <td>
                     <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Ver Detalles</a>
                 </td>

@@ -14,7 +14,7 @@
                 <li class="list-group-item">Cliente: {{ $client->name }} {{ $client->lastname }}</li>
                 <li class="list-group-item">Fecha: {{ $sale->date }}</li>
                 <li class="list-group-item">Productos Vendidos:
-                    <table class="table text-center">
+                    <table class="table text-center" style="max-height: 300px; overflow-y: auto;">
                         <thead>
                             <tr>
                                 <th>Producto</th>
