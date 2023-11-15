@@ -73,11 +73,11 @@ class SaleController extends Controller
             return redirect()->route('sales.index')->with('error', 'Venta no encontrada.');
         }
     }
-    public function edit(string $id)
+    public function edit($id, $productCount)
     {
         $sale = Sale::find($id);
         $clients = Client::select('id', 'name', 'lastname')->get();
-        return view('SaleEdit', compact('sale', 'clients'));
+        return view('SaleEdit', compact('sale', 'clients', 'productCount'));
     }
     public function update(Request $request, $id)
     {

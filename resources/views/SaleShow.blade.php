@@ -51,8 +51,8 @@
             </ul>
         </div>
         <div class="card-footer">
-            <a href="{{ route('sales.edit', $sale->id) }}" class="btn btn-success">Editar</a>
-            <form method="POST" action="{{ route('sales.destroy', $sale->id) }}">
+        <a href="{{ route('sales.edit', ['id' => $sale->id, 'productCount' => $sale->saleProducts->count()]) }}" class="btn btn-success">Editar</a>
+
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Eliminar Venta</button>

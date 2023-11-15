@@ -53,7 +53,7 @@ Route::resource('sales', SaleController::class);
 Route::get('/Sale/Create', [SaleController::class, 'Create']);
 Route::delete('/Sale/Delete/{sale}', [SaleController::class, 'destroy'])->name('sales.destroy');
 Route::get('/Sale/Show/{sale}', [SaleController::class, 'show'])->name('sales.show');
-Route::get('/Sale/Edit/{id}', [SaleController::class, 'edit'])->name('sales.edit');
+Route::get('Sale/Edit/{id}/{productCount}', [SaleController::class, 'edit'])->name('sales.edit');
 Route::put('/Sale/{sale}', [SaleController::class, 'update'])->name('sales.update');
 Route::get('DownloadSales', [SaleController::class, 'pdf'])->name('Sales.pdf');
 Route::post('/Sales/GeneratePdf/{saleId}', [SaleController::class, 'generatePdf'])->name('sales.generatePdf');

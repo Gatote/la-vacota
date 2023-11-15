@@ -10,15 +10,31 @@
     <div class="card" style="max-width: 400px; margin: 0 auto;">
         <div class="card-body">
             {!! Form::model($sale, ['route' => ['sales.update', $sale->id], 'method' => 'PUT']) !!}
-                @include('FormSale')
+                @include('FormSale', ['quantity_of_products' => $productCount])
             {!! Form::close() !!}
         </div>
     </div>
 </div>
 
 <div class="container text-center mt-4">
-    <a href="{{ route('sales.index') }}" class="btn btn-primary">Volver a la lista de ventas</a>
+    <div class="btn-group" role="group" aria-label="Botones de navegación">
+        <a href="{{ route('sales.show', ['sale' => $sale->id]) }}" class="btn btn-primary">Volver a la venta</a>
+        <a href="{{ route('sales.index') }}" class="btn btn-secondary">Volver a la lista de ventas</a>
+    </div>
 </div>
-<!-- Código de instalación Cliengo para la-vacota.com --> <script type="text/javascript">(function () { var ldk = document.createElement('script'); ldk.type = 'text/javascript'; ldk.async = true; ldk.src = 'https://s.cliengo.com/weboptimizer/654262fa8de8db0032e440e7/65440aaabc71c70032c73683.js?platform=onboarding_modular'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ldk, s); })();</script>
+
+<!-- Código de instalación Cliengo para la-vacota.com -->
+<script type="text/javascript">
+    (function () {
+        var ldk = document.createElement('script');
+        ldk.type = 'text/javascript';
+        ldk.async = true;
+        ldk.src = 'https://s.cliengo.com/weboptimizer/654262fa8de8db0032e440e7/65440aaabc71c70032c73683.js?platform=onboarding_modular';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ldk, s);
+    })();
+</script>
+
 @endsection
+
 
