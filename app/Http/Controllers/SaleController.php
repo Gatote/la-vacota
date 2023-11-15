@@ -19,8 +19,12 @@ class SaleController extends Controller
         $searchQuery = $request->input('query');
 
         $sales = Sale::whereHas('client', function($query) use ($searchQuery) {
-            $query->where('name', 'like', '%' . $searchQuery . '%');
+            $query->where(function($subquery) use ($searchQuery) {
+                $subquery->where('name', 'ilike', '%' . $searchQuery . '%')
+                         ->orWhere('lastname', 'ilike', '%' . $searchQuery . '%');
+            });
         })->get();
+        
         
 
         return view('search.sales', compact('sales'));
